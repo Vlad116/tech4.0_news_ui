@@ -1,0 +1,75 @@
+$screens: (
+  mobileSOnly: (
+    min: 0px,
+    max: 359px,
+  ),
+  mobileM: (
+    min: 360px,
+  ),
+  mobileMOnly: (
+    min: 360px,
+    max: 767px,
+  ),
+  mobileOnly: (
+    min: 0px,
+    max: 767px,
+  ),
+  tablet: (
+    min: 768px,
+  ),
+  tabletOnly: (
+    min: 768px,
+    max: 1023px,
+  ),
+  desktopS: (
+    min: 1024px,
+  ),
+  desktopSOnly: (
+    min: 1024px,
+    max: 1279px,
+  ),
+  desktopM: (
+    min: 1280px,
+  ),
+  desktopMOnly: (
+    min: 1280px,
+    max: 1919px,
+  ),
+  desktopL: (
+    min: 1920px,
+  ),
+);
+
+@function nestedMapGet($map, $a, $b) {
+  @if (type_of($a) != "string" or type_of($b) != "string") {
+    @error "Arguments value should be a string";
+  }
+
+  @if (map_has_key($map, $a)) {
+    @return map_get(map_get($map, $a), $b);
+  } @else {
+    @error "Map has no such key";
+  }
+}
+
+@mixin mediaQuery($bpts, $bpt) {
+  @if (map_has_key(map_get($bpts, $bpt), max)) {
+    @media only screen and (min-width: nestedMapGet($bpts, $bpt, min)) and (max-width: nestedMapGet($bpts, $bpt, max)) {
+      @content;
+    }
+  } @else {
+    @media only screen and (min-width: nestedMapGet($bpts, $bpt, min)) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint($bpt) {
+  @if (map_has_key($screens, $bpt)) {
+    @include mediaQuery($screens, $bpt) {
+      @content;
+    }
+  } @else {
+    @error "No breakpoints named #{$bpt}";
+  }
+}

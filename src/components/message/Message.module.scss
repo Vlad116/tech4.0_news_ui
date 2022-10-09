@@ -1,0 +1,22 @@
+@import "../../common/mixins/index.scss";
+
+.root {
+  text-align: start;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+
+  width: 100%;
+  height: fit-content;
+  border-radius: 8px;
+  background-color: color(gray);
+
+  @include fontProps(14px, color(black));
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
+  @include breakpoint(mobileOnly) {
+    max-width: 288px;
+  }
+}

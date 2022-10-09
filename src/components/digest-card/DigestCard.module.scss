@@ -1,0 +1,88 @@
+@import "../../common/mixins/index.scss";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  // margin-bottom: 16px;
+  width: 100%;
+  height: fit-content;
+  border: 1px solid color(gray);
+  border-radius: 10px;
+
+  @include fontProps(14px, color(white));
+  font-weight: 300;
+
+  // &:last-child {
+  //   margin-bottom: 0px;
+  // }
+
+  @include breakpoint(mobileOnly) {
+    min-width: 288px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-weight: 400;
+    @include fontProps(10px, color(white, 90));
+
+    // &_label {
+    // }
+    &_right {
+      color: color(white, 90);
+
+      .root__author {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  &__title {
+    margin-block: 10px 8px;
+    @include fontProps(16px, color(white));
+    font-weight: 700;
+  }
+
+  &__short {
+    margin-block: 0px 16px;
+    font-weight: 400;
+  }
+
+  &__tags {
+    margin-bottom: 16px;
+
+    & a {
+      @include fontProps(14px, color(blue));
+      font-weight: 500;
+      text-decoration: none;
+      margin-right: 4px;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &_source {
+      & a {
+        color: color(blue);
+        text-decoration: none;
+      }
+    }
+    &_controls {
+      & svg {
+        margin-left: 12px;
+      }
+    }
+  }
+}

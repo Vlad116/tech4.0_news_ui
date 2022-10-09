@@ -1,0 +1,29 @@
+$colors: (
+  black: (
+    default: #000000,
+    text: #0e0e0e,
+    bg: #0e0e0e,
+  ),
+  white: (
+    default: #ffffff,
+    80: #f8fff8,
+    90: #fefffe,
+    100: #ffffff,
+  ),
+  gray: (
+    default: #d9d9d9,
+    bgInput: #767680,
+  ),
+  blue: (
+    default: #0077ff,
+  ),
+);
+
+@function color($color, $tone: "default", $alpha: 1) {
+  @if (map-has-key($colors, $color)) {
+    @return rgba(map-get(map-get($colors, $color), $tone), $alpha);
+  } @else {
+    @error 'COLOR "#{$color}" NOT DEFINED';
+    @return null;
+  }
+}

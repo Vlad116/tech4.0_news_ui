@@ -1,0 +1,43 @@
+@import "./breakpoints.scss";
+
+@mixin onHover($color: false, $important: false) {
+  @include breakpoint(desktopS) {
+    @if ($color) {
+      &:hover {
+        color: if($important, $color !important, $color);
+      }
+    } @else {
+      &:hover {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin onActive($color: false, $important: false) {
+  @include breakpoint(desktopS) {
+    @if ($color) {
+      &:active {
+        color: if($important, $color !important, $color);
+      }
+    } @else {
+      &:active {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin onFocus($color: false, $important: false) {
+  @include breakpoint(desktopS) {
+    @if ($color) {
+      &:focus {
+        color: if($important, $color !important, $color);
+      }
+    } @else {
+      &:focus {
+        @content;
+      }
+    }
+  }
+}

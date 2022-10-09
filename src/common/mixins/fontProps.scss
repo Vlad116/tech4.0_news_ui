@@ -1,0 +1,114 @@
+@import "./breakpoints.scss";
+@import "./colors.scss";
+
+$fontSizeList: (
+  10px: (
+    fontSize: 10px,
+    lineHeight: 12px,
+  ),
+  12px: (
+    fontSize: 12px,
+    lineHeight: 16px,
+  ),
+  13px: (
+    fontSize: 13px,
+    lineHeight: 16px,
+  ),
+  14px: (
+    fontSize: 14px,
+    lineHeight: 16px,
+  ),
+  15px: (
+    fontSize: 15px,
+    lineHeight: 20px,
+  ),
+  16px: (
+    fontSize: 16px,
+    lineHeight: 20px,
+  ),
+  18px: (
+    fontSize: 18px,
+    lineHeight: 24px,
+  ),
+  20px: (
+    fontSize: 20px,
+    lineHeight: 24px,
+  ),
+  22px: (
+    fontSize: 22px,
+    lineHeight: 24px,
+  ),
+  24px: (
+    fontSize: 24px,
+    lineHeight: 38px,
+    // mobFontSize: 22px,
+    // mobLineHeight: 24px,,,,,
+  ),
+  28px: (
+    fontSize: 28px,
+    lineHeight: 32px,
+    // fontWeight: 700,
+    // mobFontSize: 24px,
+    // mobLineHeight: 28px,,
+  ),
+  32px: (
+    fontSize: 32px,
+    lineHeight: 36px,
+    // fontWeight: 700,
+    // mobFontSize: 26px,
+    // mobLineHeight: 32px,,,,
+  ),
+  36px: (
+    fontSize: 36px,
+    lineHeight: 40px,
+  ),
+  40px: (
+    fontSize: 40px,
+    lineHeight: 44px,
+    fontWeight: 700,
+    // mobFontSize: 28px,
+    // mobLineHeight: 32px,,,,
+  ),
+  64px: (
+    fontSize: 64px,
+    lineHeight: 100px,
+    // mobFontSize: 32px,
+    // mobLineHeight: 36px,,,,
+  ),
+);
+
+@mixin fontProps(
+  $size,
+  $color: color(black, text),
+  $weight: 400,
+  $isMedia: true
+) {
+  @if (not $size) {
+    @error "Font size not defined";
+  }
+
+  @if (map-has-key($fontSizeList, $size)) {
+    $selectedSize: map-get($fontSizeList, $size);
+
+    font-size: map-get($selectedSize, fontSize);
+    line-height: map-get($selectedSize, lineHeight);
+    color: $color;
+
+    // @if (map-has-key($selectedSize, fontWeight)) {
+    //   font-weight: map-get($selectedSize, fontWeight);
+    // } @else {
+    //   font-weight: $weight;
+    // }
+
+    @if ($isMedia and map-has-key($selectedSize, mobFontSize)) {
+      @include newBreakpoint(mobileOnly) {
+        font-size: map-get($selectedSize, mobFontSize);
+        line-height: map-get($selectedSize, mobLineHeight);
+      }
+    }
+  } @else {
+    font-size: $size;
+    line-height: normal;
+    color: $color;
+  }
+}

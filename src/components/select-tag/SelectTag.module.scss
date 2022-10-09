@@ -1,0 +1,25 @@
+@import "../../common/mixins/index.scss";
+
+.root {
+  text-align: center;
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid color(gray);
+
+  // width: fit-content;
+  height: fit-content;
+  border-radius: 8px;
+
+  font-weight: 600;
+  @include fontProps(16px, color(gray));
+
+  @include onHover {
+    background: color(gray);
+    color: color(black, text);
+  }
+
+  &.checked {
+    background: color(gray);
+    color: color(black, text);
+  }
+}
